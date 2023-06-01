@@ -34,6 +34,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+// androidx.navigation.NavController에도 navigateUp이 있는데, navigateion.ui를 쓰려면 수동으로 import해줘야함.
 import androidx.navigation.ui.navigateUp
 
 /**
@@ -45,6 +46,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.navigation_activity)
+
+        Log.d("MainActivity", "onCreate : 들어옴")
 
         val toolbar = findViewById<Toolbar>(R.id.toolbar)
         setSupportActionBar(toolbar)
@@ -60,6 +63,7 @@ class MainActivity : AppCompatActivity() {
         // TODO STEP 9.5 - Create an AppBarConfiguration with the correct top-level destinations
         // You should also remove the old appBarConfiguration setup above
         val drawerLayout : DrawerLayout? = findViewById(R.id.drawer_layout)
+        Log.d("MainActivity", "drawerLayout : $drawerLayout")
         appBarConfiguration = AppBarConfiguration(
                 setOf(R.id.home_dest, R.id.deeplink_dest),
                 drawerLayout)
