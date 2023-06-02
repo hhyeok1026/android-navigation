@@ -55,6 +55,8 @@ class MainActivity : AppCompatActivity() {
         val host: NavHostFragment = supportFragmentManager
                 .findFragmentById(R.id.my_nav_host_fragment) as NavHostFragment? ?: return
 
+        Log.d("MainActivity", "host : $host")
+
         // Set up Action Bar
         val navController = host.navController
 
@@ -77,8 +79,10 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
             val dest: String = try {
+                Log.d("NavigationActivity", "try문 들어옴")
                 resources.getResourceName(destination.id)
             } catch (e: Resources.NotFoundException) {
+                Log.d("NavigationActivity", "catch문 들어옴.")
                 Integer.toString(destination.id)
             }
 
@@ -91,7 +95,10 @@ class MainActivity : AppCompatActivity() {
     private fun setupBottomNavMenu(navController: NavController) {
         // TODO STEP 9.3 - Use NavigationUI to set up Bottom Nav
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
+        Log.d("MainActivity", "setupBottomNavMenu bottomNav : $bottomNav")
         bottomNav?.setupWithNavController(navController)
+
+        // NavigationUI.setupWithNavController(bottomNav , navController)
         // TODO END STEP 9.3
     }
 
@@ -100,6 +107,7 @@ class MainActivity : AppCompatActivity() {
         // In split screen mode, you can drag this view out from the left
         // This does NOT modify the actionbar
         val sideNavView = findViewById<NavigationView>(R.id.nav_view)
+        Log.d("MainActivity", "setupNavigationMenu sideNavView : $sideNavView")
         sideNavView?.setupWithNavController(navController)
         // TODO END STEP 9.4
     }
@@ -120,6 +128,9 @@ class MainActivity : AppCompatActivity() {
 
         // The NavigationView already has these same navigation items, so we only add
         // navigation items to the menu here if there isn't a NavigationView
+
+        Log.d("MainActivity", "onCreateOptionsMenu navigationView : $navigationView")
+
         if (navigationView == null) {
             menuInflater.inflate(R.menu.overflow_menu, menu)
             return true
